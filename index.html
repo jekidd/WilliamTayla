@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <title>William & Tayla</title>
+        <style>
+            * {
+              box-sizing: border-box;
+              margin: 0;
+              padding: 0;
+            }
+            body {
+                background-color: #ffd54f;
+                display: flex;
+                margin: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: #000;
+                align-items: center;
+            }
+            li {
+              display: inline-block;
+              font-size: 1em;
+              list-style-type: none;
+              padding: 1em;
+              text-transform: uppercase;
+              color: white;
+              font-family: -apple-system, 
+    BlinkMacSystemFont, 
+    "Segoe UI", 
+    Roboto, 
+    Oxygen-Sans, 
+    Ubuntu, 
+    Cantarell, 
+    "Helvetica Neue", 
+    sans-serif;
+            }
+            
+            li span {
+              display: block;
+              font-size: 2.5rem;
+            }
+            .slideshow {
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                background-position: center center;
+            }
+            .gradient {
+                width: 2000px;
+                height: 2000px;
+                position: fixed;
+                top: -1000px;
+                left: -1000px;
+                background: rgb(0,0,0);
+                background: radial-gradient(circle, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.60) 20%, rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%);
+            }
+            .widget {
+                max-width: 450px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                text-align: center;
+            }
+            .cover {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.25);
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div style='background-image: url("1.jpg");' class="slideshow"></div>
+        <div class="gradient"></div>
+        <div class="cover"></div>
+        <div class="widget" style="">
+            <img src="img/logo.png" style="width: 100%;">
+            <div id="countdown">
+                <ul>
+                  <li><span id="days"></span>días</li>
+                  <li><span id="hours"></span>horas</li>
+                  <li><span id="minutes"></span>minutos</li>
+                  <li><span id="seconds"></span>segundos</li>
+                </ul>
+            </div>
+        </div>
+<script>
+$(document).ready(function(){
+    console.log('hello');
+    var galleryImage = $('.slideshow').first();
+    var images = [
+        'url("1.jpg")',
+        'url("2.png")',
+        'url("3.jpg")',
+        'url("4.jpg")',
+        'url("5.jpg")',
+        'url("6.jpg")',
+        'url("7.jpg")',
+        'url("8.jpg")',
+    ];
+
+    var i = 0;
+    setInterval(function() {
+        i = (i + 1) % images.length;
+        galleryImage.fadeOut(750, function(){
+            $(this).css('background-image', images[i]);
+            $(this).fadeIn(750);
+        })
+    }, 7500);
+})
+</script>
+<script>
+(function () {
+  const second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+
+  let birthday = "Sep 10, 2021 17:00:00",
+      countDown = new Date(birthday).getTime(),
+      x = setInterval(function() {    
+
+        let now = new Date().getTime(),
+            distance = countDown - now;
+
+        document.getElementById("days").innerText = Math.floor(distance / (day)),
+          document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+          document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+          document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+
+        //do something later when date is reached
+        if (distance < 0) {
+          let headline = document.getElementById("headline"),
+              countdown = document.getElementById("countdown"),
+              content = document.getElementById("content");
+
+          countdown.style.display = "none";
+
+          clearInterval(x);
+        }
+        //seconds
+      }, 0)
+  }());
+</script>
+    </body>
+</html>
